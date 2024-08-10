@@ -6,7 +6,7 @@
 #    By: mouad <mouad@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/03 16:05:43 by mel-bouh          #+#    #+#              #
-#    Updated: 2024/08/09 03:13:33 by mouad            ###   ########.fr        #
+#    Updated: 2024/08/10 11:08:01 by mouad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,15 @@ CC 			= gcc
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

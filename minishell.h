@@ -9,10 +9,23 @@
 # include <readline/history.h>
 # include "./libft/libft.h"
 
-# define ARG 1
-# define CMD 2
-# define VAR 3
-# define QUO 4
-# define RED 5
+typedef enum
+{
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	HEREDOC,
+	EXPORT,
+	ARG
+}	t_token;
+
+typedef struct s_token
+{
+	char 			*str;
+	t_token			type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_tree;
 
 #endif
