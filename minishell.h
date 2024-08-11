@@ -11,13 +11,15 @@
 
 typedef enum
 {
+	NONE,
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
-	REDIR_APPEND,
+	APPEND,
 	HEREDOC,
 	EXPORT,
-	ARG
+	ARG,
+	CMD
 }	t_token;
 
 typedef struct s_token
@@ -26,6 +28,6 @@ typedef struct s_token
 	t_token			type;
 	struct s_token	*next;
 	struct s_token	*prev;
-}	t_tree;
+}	t_line;
 
 #endif
