@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-bouh <mel-bouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mouad <mouad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:30:21 by mel-bouh          #+#    #+#             */
-/*   Updated: 2023/11/06 23:03:03 by mel-bouh         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:44:17 by mouad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	while (*s)
 	{
 		if (*s == (unsigned char)c)

@@ -30,4 +30,8 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_line;
 
+void	lexer(char **arg, t_line *head);
+void	ft_lstadd_back(t_line **head, t_line *new);
+t_token	get_token(char *str);
+
 #endif

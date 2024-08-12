@@ -6,28 +6,27 @@
 /*   By: mouad <mouad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:40:33 by mel-bouh          #+#    #+#             */
-/*   Updated: 2024/08/11 16:30:04 by mouad            ###   ########.fr       */
+/*   Updated: 2024/08/12 15:57:54 by mouad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *line, char *buf)
 {
-	int		i;
-	int		j;
 	char	*join;
 
-	i = 0;
-	j = 0;
-	join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (join == NULL)
+	if (!line && !buf)
 		return (NULL);
-	while (s1 && s1[i])
-		join[j++] = s1[i++];
-	i = 0;
-	while (s2 && s2[i])
-		join[j++] = s2[i++];
-	join[j] = '\0';
-	return (join);
+	join = (char *)malloc(ft_strlen(line) + ft_strlen(buf) + 1);
+	if (!join)
+		return (NULL);
+	join[0] = '\0';
+	if (line)
+		ft_strlcat(join, line, ft_strlen(line) + 1);
+	if (buf)
+		ft_strlcat(join, buf, ft_strlen(buf) + ft_strlen(line) + 1);
+	if (!join[0])
+		return (free(join), NULL);
+	return (free(line), join);
 }
