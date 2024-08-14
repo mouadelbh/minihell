@@ -1,5 +1,5 @@
 NAME	=	minishell
-FILES	=	minishell.c lexer.c utils.c
+FILES	=	minishell.c lexer.c utils.c tokenize.c
 LIBFT	=	libft.a
 FLAGS	=	-lreadline # -Wall -Wextra -Werror
 OBJS	=	$(FILES:.c=.o)

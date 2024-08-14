@@ -24,7 +24,7 @@ typedef enum
 
 typedef struct s_token
 {
-	char 			*str;
+	char 			**str;
 	t_token			type;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -32,6 +32,10 @@ typedef struct s_token
 
 void	lexer(char **arg, t_line *head);
 void	ft_lstadd_back(t_line **head, t_line *new);
+void	tokenize_cmd(char *str, t_line *tmp);
+void	tokenize(char *arg, t_line *tmp);
+void	tokenize_arg(char **arg, int *i, t_line *tmp);
+void	tokenize_quotarg(char **arg, int *i, t_line *tmp, char c);
 t_token	get_token(char *str);
 
 #endif
