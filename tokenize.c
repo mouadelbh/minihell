@@ -1,10 +1,31 @@
 #include "parsing.h"
 
+int	end_of_quote(char *str, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	if (count % 2 == 0)
+		return (1);
+	else
+		return (0);
+}
+
 static int	count_args(char **arg, int i, char c)
 {
 	int	count;
 
 	count = 1;
+	if (end_of_quote(arg[i], c) && get_token(arg[i + 1]) != NONE)
+		return (count);
 	i++;
 	while (arg[i] && !ft_strchr(arg[i], c))
 	{
@@ -26,14 +47,21 @@ void	tokenize_quotarg(char **arg, int *i, t_line *tmp, char c)
 	tmp->str = malloc(sizeof(char *) * (count + 1));
 	tmp->str[j] = ft_strdup(arg[*i]);
 	j++;
+	// printf("token = %i arg = %s\n", get_token(arg[*i]), arg[*i]);
+	if (end_of_quote(arg[*i], c) && get_token(arg[*i + 1]) != NONE)
+	{
+		tmp->str[j] = NULL;
+		tmp->type = ARG;
+		*i += 1;
+		return ;
+	}
 	*i += 1;
-	while (arg[*i] && !ft_strchr(arg[*i], c))
+	while (arg[*i] && !ft_strchr(arg[*i], c) && get_token(arg[*i + 1]) != NONE)
 	{
 		tmp->str[j] = ft_strdup(arg[*i]);
 		j++;
 		*i += 1;
 	}
-	printf("arg[%i]: %s\n", *i,arg[*i]);
 	if (arg[*i])
 	{
 		tmp->str[j] = ft_strdup(arg[*i]);
