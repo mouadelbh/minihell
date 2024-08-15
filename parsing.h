@@ -1,5 +1,5 @@
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSING_H
+# define PARSING_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -25,17 +25,18 @@ typedef enum
 typedef struct s_token
 {
 	char 			**str;
+	char			**env;
 	t_token			type;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_line;
 
 void	lexer(char **arg, t_line *head);
-void	ft_lstadd_back(t_line **head, t_line *new);
 void	tokenize_cmd(char *str, t_line *tmp);
 void	tokenize(char *arg, t_line *tmp);
 void	tokenize_arg(char **arg, int *i, t_line *tmp);
 void	tokenize_quotarg(char **arg, int *i, t_line *tmp, char c);
+void	parse(char *line, t_line *head, char **env);
 t_token	get_token(char *str);
 
 #endif

@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "parsing.h"
 
 static int	count_args(char **arg, int i, char c)
 {

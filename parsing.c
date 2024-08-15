@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "parsing.h"
 
 int	special_char(char *str, int i)
 {
@@ -49,24 +49,46 @@ int	checkspaces(char *line)
 	return (1);
 }
 
-t_line	*parse(char *line)
+void	get_env(t_line *line, char **env)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	while (env[i])
+		i++;
+	tmp = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		tmp[i] = ft_strdup(env[i]);
+		i++;
+	}
+	tmp[i] = NULL;
+	while (line)
+	{
+		line->env = tmp;
+		line = line->next;
+	}
+}
+
+void	parse(char *line, t_line *head, char **env)
 {
 	char	**arg;
-	t_line	*head;
 
 	if (!checkspaces(line))
-		return (NULL);
+		return ;
 	if (!checkquotes(line))
-		return (NULL);
+		return ;
 	head = NULL;
 	arg = ft_split(line, ' ');
 	if (!arg)
-		return (NULL);
+		return ;
 	lexer(arg, head);
-	return (head);
+	get_env(head, env);
 }
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_line	*head;
@@ -77,8 +99,7 @@ int main(int ac, char **av)
 		if (!line)
 			break ;
 		add_history(line);
-		head = parse(line);
-		printf("%p\n", head);
+		parse(line, head, env);
 		free(line);
 	}
 }

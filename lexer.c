@@ -1,4 +1,19 @@
-#include "minishell.h"
+#include "parsing.h"
+
+static void	lstadd_back(t_line **head, t_line *new)
+{
+	t_line	*tmp;
+
+	if (!*head)
+	{
+		*head = new;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+}
 
 t_token	get_token(char *str)
 {
@@ -49,7 +64,7 @@ void	lexer(char **arg, t_line *head)
 			tokenize(arg[i++], tmp);
 		else
 			tokenize_arg(arg, &i, tmp);
-		ft_lstadd_back(&head, tmp);
+		lstadd_back(&head, tmp);
 	}
 	while (head)
 	{
