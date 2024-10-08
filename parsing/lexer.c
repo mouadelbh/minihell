@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-bouh <mel-bouh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/15 13:58:49 by prizmo            #+#    #+#             */
+/*   Updated: 2024/10/02 09:23:41 by mel-bouh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 static void	lstadd_back(t_line **head, t_line *new)
@@ -43,7 +55,7 @@ int	is_command(char **arg, int i)
 		return (0);
 }
 
-void	lexer(char **arg, t_line *head)
+void	lexer(char **arg, t_line **head, t_parse *data)
 {
 	t_line	*tmp;
 	int		i;
@@ -64,15 +76,8 @@ void	lexer(char **arg, t_line *head)
 			tokenize(arg[i++], tmp);
 		else
 			tokenize_arg(arg, &i, tmp);
-		lstadd_back(&head, tmp);
+		tmp->data = data;
+		lstadd_back(head, tmp);
 	}
-	while (head)
-	{
-		printf("this is a node\n");
-		printf("--------------\n");
-		for (int j = 0; head->str[j]; j++)
-			printf("str: %s\n", head->str[j]);
-		printf("type: %d\n", head->type);
-		head = head->next;
-	}
+	ft_free(arg);
 }
