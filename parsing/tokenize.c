@@ -6,7 +6,7 @@
 /*   By: mel-bouh <mel-bouh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:58:58 by prizmo            #+#    #+#             */
-/*   Updated: 2024/10/02 09:26:09 by mel-bouh         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:35:32 by mel-bouh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,4 @@ void	tokenize_cmd(char *str, t_line *tmp)
 	tmp->str[1] = NULL;
 	tmp->type = CMD;
 	tmp->next = NULL;
-	printf("str == %s, tmp == %s\n", str, tmp->str[0]);
 }
